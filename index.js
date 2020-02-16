@@ -6,8 +6,13 @@ const config = require('./config/default')
 const PORT = process.env.PORT || config.port 
 const app = express()
 
+app.use(express.json({extended: true}))
+
+
 app.use('/api/auth', require('./routes/auth.route'))
+app.use('/api/links', require('./routes/link.route'))
 app.use('/api/todos', require('./routes/todos.route'))
+
 
 
 async function start() {
@@ -15,7 +20,7 @@ async function start() {
         /*
             await db connection
         */ 
-        await mongoose.connect('mongodb+srv://root:1q2w3e4r@cluster0-faph0.mongodb.net/todos', {
+        await mongoose.connect('mongodb+srv://root:1q2w3e4r@cluster0-faph0.mongodb.net/shorter', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true
